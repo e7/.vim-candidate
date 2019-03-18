@@ -54,6 +54,9 @@ Plug 'https://github.com/octol/vim-cpp-enhanced-highlight'
 " YCM
 Plug 'https://github.com/Valloric/YouCompleteMe'
 
+" auto save
+Plug 'https://github.com/907th/vim-auto-save'
+
 call plug#end()
 
 " ++++++++++++++++++++++++++++++++++ common settings
@@ -98,7 +101,7 @@ let g:asyncrun_bell = 1
 nnoremap <F9> :call asyncrun#quickfix_toggle(16)<cr>
 
 " 编译运行单个文件
-nnoremap <silent> <F6> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <F6> :AsyncRun g++ -Wall -ggdb -O0 -std=c++17 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " find project root
@@ -117,8 +120,8 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
 
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_gcc_options = '-Wall ggdb -O0 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -ggdb -O0 -std=c++17'
 let g:ale_c_cppcheck_options = ''
 let g:ale_cpp_cppcheck_options = ''
 
@@ -158,3 +161,7 @@ let g:ycm_semantic_triggers =  {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
             \ 'cs,lua,javascript': ['re!\w{2}'],
             \ }
+
+" ++++++++++++++++++++++++++++++++ auto save
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_events = ["InsertLeave", "TextChanged"]
