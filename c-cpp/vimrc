@@ -62,7 +62,7 @@ call plug#end()
 " ++++++++++++++++++++++++++++++++++ common settings
 set nonumber
 syntax on
-colorscheme desert
+colorscheme darkblue
 " tab设置
 autocmd FileType c,cc,cpp,py,yml,xml set tabstop=4 | set shiftwidth=4 | set expandtab
 " 尾部空格删除
@@ -74,6 +74,12 @@ set hlsearch " 搜索高亮
 set laststatus=2 "显示状态栏
 set statusline=[%F][%{&fileformat}][%Y]%m%r\ %p%%:%L:%l,%c%V
 set ruler "标尺信息
+if has("gui_running")
+    set guioptions-=T " 隐藏工具栏
+    set guioptions-=m " 隐藏菜单栏
+    set guioptions-=L " 隐藏左侧滚动条
+    set guioptions-=r " 隐藏右侧滚动条
+endif
 
 " ++++++++++++++++++++++++++++++++++ nerdtree settings
 map <F3> :NERDTreeToggle<CR>
