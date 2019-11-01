@@ -74,6 +74,7 @@ set hlsearch " 搜索高亮
 set laststatus=2 "显示状态栏
 set statusline=[%F][%{&fileformat}][%Y]%m%r\ %p%%:%L:%l,%c%V
 set ruler "标尺信息
+set colorcolumn=81 " 超过长度提示
 if has("gui_running")
     set guioptions-=T " 隐藏工具栏
     set guioptions-=m " 隐藏菜单栏
