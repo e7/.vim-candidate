@@ -1,5 +1,9 @@
 set nocompatible
 
+if has("unix")
+  set backspace=2
+endif
+
 " install vim-plug(https://github.com/junegunn/vim-plug)
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -113,7 +117,7 @@ let g:asyncrun_bell = 1
 nnoremap <F9> :call asyncrun#quickfix_toggle(16)<cr>
 
 " 编译运行单个文件
-nnoremap <silent> <F6> :AsyncRun g++ -Wall -ggdb -O0 -std=c++17 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+nnoremap <silent> <F6> :AsyncRun g++ -Wall -ggdb -O0 -std=c++14 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 
 " find project root
@@ -132,10 +136,12 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:airline#extensions#ale#enabled = 1
 
-let g:ale_c_gcc_options = '-Wall ggdb -O0 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -ggdb -O0 -std=c++17'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
+let g:ale_c_clang_options = ''
+let g:ale_cpp_clang_options = ''
+let g:ale_c_gcc_options = '-Wall -ggdb -O0 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -ggdb -O0 -std=c++14'
+let g:ale_c_cppcheck_options = '-Wall -g -O0 -std=c99'
+let g:ale_cpp_cppcheck_options = '-Wall -std=c++14'
 
 let g:ale_sign_error = "\ue009\ue009"
 hi! clear SpellBad
@@ -170,7 +176,7 @@ set completeopt=menu,menuone
 noremap <c-z> <NOP>
 
 let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'c,cc,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
             \ 'cs,lua,javascript': ['re!\w{2}'],
             \ }
 
