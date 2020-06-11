@@ -66,9 +66,10 @@ call plug#end()
 " ++++++++++++++++++++++++++++++++++ common settings
 set nonumber
 syntax on
-colorscheme darkblue
+colorscheme desert
 " tab设置
-autocmd FileType c,cc,cpp,py,yml,xml set tabstop=4 | set shiftwidth=4 | set expandtab
+autocmd FileType py set tabstop=4 noexpandtab
+autocmd FileType c,cc,cpp,yml,xml set tabstop=4 | set shiftwidth=4 | set expandtab
 " 尾部空格删除
 autocmd BufWrite * execute ":mark z"
 autocmd BufWrite * execute ":%s/ *$//"
@@ -78,7 +79,7 @@ set hlsearch " 搜索高亮
 set laststatus=2 "显示状态栏
 set statusline=[%F][%{&fileformat}][%Y]%m%r\ %p%%:%L:%l,%c%V
 set ruler "标尺信息
-set colorcolumn=81 " 超过长度提示
+set colorcolumn=101 " 超过长度提示
 if has("gui_running")
     set guioptions-=T " 隐藏工具栏
     set guioptions-=m " 隐藏菜单栏
